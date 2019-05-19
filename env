@@ -1,0 +1,9 @@
+################################
+# DATAFLOW MGR
+################################
+export DF_DEBUGON='true'
+export DF_GCP_PROJECT='{{project}}'
+export DF_BUCKET='{{bucket}}'
+export DF_GCP_REGION='europe-west1'
+export DF_SQLDST='postgres'
+export DF_SQLCNX='host=127.0.0.1 port=5436 sslmode=disable dbname=dataflowcontrol user=dataflowcontroluser password={{password}}'

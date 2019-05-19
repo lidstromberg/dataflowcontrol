@@ -1,0 +1,4 @@
+go get -u github.com/lib/pq
+go get -u golang.org/x/net/context
+go get -u golang.org/x/oauth2/google
+go get -u google.golang.org/api/dataflow/v1b3

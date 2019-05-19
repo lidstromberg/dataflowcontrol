@@ -1,0 +1,12 @@
+#!/bin/bash
+
+####################################
+# setup params
+####################################
+PROJECT="{{project}}"
+BUCKETNAME="{{bucket}}"
+
+####################################
+# move the files to their required locations
+####################################
+gsutil cp ./dataflowjobdef.json gs://${BUCKETNAME}/dataflow/jobdef/dataflowjobdef.json

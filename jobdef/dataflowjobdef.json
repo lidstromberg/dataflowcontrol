@@ -1,0 +1,23 @@
+{
+    "customparameters" : {
+        "runner":"DataflowRunner",
+        "project":"{{project}}",
+        "gcpTempLocation":"gs://{{project}}/dataflow/temp/",
+        "stagingLocation":"gs://{{project}}/dataflow/staging/{{subpath}}",
+        "templateLocation":"gs://{{project}}/dataflow/templates/{{dataflowtemplatename}}",
+        "gcpProjectName":"{{project}}",
+        "gaSqlBucketName": "{{bucket}}"
+    },
+    "runtimeenvironment": {
+        "maxWorkers": "1",
+        "machineType": "n1-standard-1",
+        "numWorkers": "1",
+        "tempLocation": "gs://{{project}}/dataflow/temp/"
+    },
+    "jobrequest": {
+        "jobName": "dflauncher%s",
+        "jobType": "df-etl",
+        "location": "europe-west1",
+        "gcsPath": "gs://{{project}}/dataflow/templates/{{dataflowtemplatename}}"
+    }
+}

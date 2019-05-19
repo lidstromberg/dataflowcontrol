@@ -1,0 +1,18 @@
+CREATE DATABASE dataflowcontrol
+    WITH 
+    OWNER = cloudsqlsuperuser
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.UTF8'
+    LC_CTYPE = 'en_US.UTF8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+CREATE USER dataflowcontroluser WITH
+	LOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD '##############';
