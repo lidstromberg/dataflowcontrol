@@ -183,7 +183,7 @@ func Test_StopJob(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if jbst.CurrentState == "JOB_STATE_RUNNING" {
+	if jbst.CurrentState == CnstStateRunning {
 		_, err := df.JobStop(ctx, jbs[0].JobID)
 		if err != nil {
 			t.Fatal(err)
