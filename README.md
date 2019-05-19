@@ -9,6 +9,7 @@ This is a package for starting, monitoring and stopping GCP dataflow jobs. It us
 | File | Purpose |
 | ------ | ------ |
 | schema/ | Postgres db creation scripts |
+| jobdef/ | Example dataflow pipeline options json config file |
 | dfmgr.go | Logic manager |
 | dfmgr_test.go | Tests |
 | pgmgr.go | Postgres logic manager |
