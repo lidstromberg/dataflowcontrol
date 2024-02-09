@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strconv"
 	"time"
 
@@ -16,7 +16,7 @@ import (
 	df "google.golang.org/api/dataflow/v1b3"
 )
 
-//DfMgr covers job management functionality
+// DfMgr covers job management functionality
 type DfMgr struct {
 	dfsvc *df.Service
 	ds    *PgMgr
@@ -24,9 +24,9 @@ type DfMgr struct {
 	bc    cfg.ConfigSetting
 }
 
-//NewGoogleCredentials returns a GCP/Google credential from a supplied file.. reference... might not be needed
+// NewGoogleCredentials returns a GCP/Google credential from a supplied file.. reference... might not be needed
 func NewGoogleCredentials(ctx context.Context, path string) (*google.Credentials, error) {
-	data, err := ioutil.ReadFile("/path/to/key-file.json")
+	data, err := os.ReadFile("/path/to/key-file.json")
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func NewGoogleCredentials(ctx context.Context, path string) (*google.Credentials
 	return creds, nil
 }
 
-//NewMgr returns a new manager
+// NewMgr returns a new manager
 func NewMgr(ctx context.Context, bc cfg.ConfigSetting) (*DfMgr, error) {
 	preflight(ctx, bc)
 
@@ -87,7 +87,7 @@ func NewMgr(ctx context.Context, bc cfg.ConfigSetting) (*DfMgr, error) {
 	return abm, nil
 }
 
-//JobStart starts a job from a template
+// JobStart starts a job from a template
 func (dfm *DfMgr) JobStart(ctx context.Context, appscope, jobtype string, jobParam *JobRunParameter) (*JobSimpleMeta, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "JobStart", "info", "start")
@@ -174,7 +174,7 @@ func (dfm *DfMgr) JobStart(ctx context.Context, appscope, jobtype string, jobPar
 	return jbmeta, nil
 }
 
-//GetJobStatus gets a job from an id
+// GetJobStatus gets a job from an id
 func (dfm *DfMgr) GetJobStatus(ctx context.Context, jobID string) (*df.Job, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "JobStatus", "info", "start")
@@ -203,7 +203,7 @@ func (dfm *DfMgr) GetJobStatus(ctx context.Context, jobID string) (*df.Job, erro
 	return jb, nil
 }
 
-//JobStop stops a job
+// JobStop stops a job
 func (dfm *DfMgr) JobStop(ctx context.Context, jobID string) (*df.Job, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "JobStop", "info", "start")
@@ -247,7 +247,7 @@ func (dfm *DfMgr) JobStop(ctx context.Context, jobID string) (*df.Job, error) {
 	return jb, nil
 }
 
-//GetGcsJobDefinition retrieves a GCS bucket hosted set of parameters for a dataflow job
+// GetGcsJobDefinition retrieves a GCS bucket hosted set of parameters for a dataflow job
 func (dfm *DfMgr) GetGcsJobDefinition(ctx context.Context, filename string) (*JobRunParameter, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "GetGcsJobDefinition", "info", "start")
@@ -274,7 +274,7 @@ func (dfm *DfMgr) GetGcsJobDefinition(ctx context.Context, filename string) (*Jo
 	return param, nil
 }
 
-//SetGcsJobDefinition retrieves a GCS bucket hosted set of parameters for a dataflow job
+// SetGcsJobDefinition retrieves a GCS bucket hosted set of parameters for a dataflow job
 func (dfm *DfMgr) SetGcsJobDefinition(ctx context.Context, filename, contenttype string, jd *JobRunParameter) error {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "SetGcsJobDefinition", "info", "start")
@@ -299,7 +299,7 @@ func (dfm *DfMgr) SetGcsJobDefinition(ctx context.Context, filename, contenttype
 	return nil
 }
 
-//GetJob gets a job by id
+// GetJob gets a job by id
 func (dfm *DfMgr) GetJob(ctx context.Context, jobID string) (*DsJob, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "GetJob", "info", "start")
@@ -317,7 +317,7 @@ func (dfm *DfMgr) GetJob(ctx context.Context, jobID string) (*DsJob, error) {
 	return jb, nil
 }
 
-//GetJobs gets a list of jobs for an appscope
+// GetJobs gets a list of jobs for an appscope
 func (dfm *DfMgr) GetJobs(ctx context.Context, appscope, jobtype, jobstate string) ([]*DsJob, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "GetActiveJobs", "info", "start")
@@ -335,7 +335,7 @@ func (dfm *DfMgr) GetJobs(ctx context.Context, appscope, jobtype, jobstate strin
 	return jbs, nil
 }
 
-//GetLatestJobs gets the most recent job for an appscope
+// GetLatestJobs gets the most recent job for an appscope
 func (dfm *DfMgr) GetLatestJobs(ctx context.Context, appscope, jobtype string, limit int) ([]*DsJob, error) {
 	if EnvDebugOn {
 		lg.LogEvent("DfMgr", "GetLatestJob", "info", "start")
